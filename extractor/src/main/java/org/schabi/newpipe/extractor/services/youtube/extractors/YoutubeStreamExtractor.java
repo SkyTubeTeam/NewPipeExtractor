@@ -100,6 +100,7 @@ public class YoutubeStreamExtractor extends StreamExtractor {
     private JsonObject videoPrimaryInfoRenderer;
     private JsonObject videoSecondaryInfoRenderer;
     private int ageLimit;
+    private boolean newJsonScheme;
 
     @Nonnull
     private List<SubtitlesInfo> subtitlesInfos = new ArrayList<>();
@@ -664,27 +665,23 @@ public class YoutubeStreamExtractor extends StreamExtractor {
         } else {
             ageLimit = NO_AGE_LIMIT;
             JsonObject playerConfig;
-
-            // sometimes at random YouTube does not provide the player config,
-            // so just retry the same request three times
-            int attempts = 2;
-            while (true) {
-                playerConfig = initialAjaxJson.getObject(2).getObject("player", null);
-                if (playerConfig != null) {
-                    break;
-                }
-
-                if (attempts <= 0) {
-                    throw new ParsingException(
-                            "YouTube did not provide player config even after three attempts");
-                }
-                initialAjaxJson = getJsonResponse(url, getExtractorLocalization());
-                --attempts;
-            }
             initialData = initialAjaxJson.getObject(3).getObject("response");
 
-            playerArgs = getPlayerArgs(playerConfig);
-            playerUrl = getPlayerUrl(playerConfig);
+            // sometimes at random YouTube does not provide the player config
+            playerConfig = initialAjaxJson.getObject(2).getObject("player", null);
+
+            if (playerConfig == null) {
+                newJsonScheme = true;
+                final EmbeddedInfo info = getEmbeddedInfo();
+                final String videoInfoUrl = getVideoInfoUrl(getId(), info.sts);
+                final String infoPageResponse = downloader.get(videoInfoUrl, getExtractorLocalization()).responseBody();
+                videoInfoPage.putAll(Parser.compatParseMap(infoPageResponse));
+                playerUrl = info.url;
+            } else {
+                playerArgs = getPlayerArgs(playerConfig);
+                playerUrl = getPlayerUrl(playerConfig);
+            }
+
         }
 
         playerResponse = getPlayerResponse();
@@ -732,6 +729,10 @@ public class YoutubeStreamExtractor extends StreamExtractor {
     private JsonObject getPlayerResponse() throws ParsingException {
         try {
             String playerResponseStr;
+            if (newJsonScheme) {
+                return initialAjaxJson.getObject(2).getObject("playerResponse");
+            }
+
             if (playerArgs != null) {
                 playerResponseStr = playerArgs.getString("player_response");
             } else {
