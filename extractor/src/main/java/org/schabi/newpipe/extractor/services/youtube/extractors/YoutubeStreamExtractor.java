@@ -799,7 +799,12 @@ public class YoutubeStreamExtractor extends StreamExtractor {
         videoInfoPage.putAll(Parser.compatParseMap(infoPageResponse));
 
         try {
-            playerResponse = JsonParser.object().from(videoInfoPage.get("player_response"));
+            final String videoInfoPagePlayerResponse = videoInfoPage.get("player_response");
+            if (videoInfoPagePlayerResponse != null) {
+                playerResponse = JsonParser.object().from(videoInfoPagePlayerResponse);
+            } else {
+                throw new ParsingException("Could not parse YouTube player response from video info page: "+ videoInfoUrl);
+            }
         } catch (final JsonParserException e) {
             throw new ParsingException(
                     "Could not parse YouTube player response from video info page", e);
