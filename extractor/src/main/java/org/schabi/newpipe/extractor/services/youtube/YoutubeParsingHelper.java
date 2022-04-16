@@ -25,6 +25,7 @@ import static org.schabi.newpipe.extractor.utils.Utils.HTTP;
 import static org.schabi.newpipe.extractor.utils.Utils.HTTPS;
 import static org.schabi.newpipe.extractor.utils.Utils.getStringResultFromRegexArray;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 import com.grack.nanojson.JsonArray;
 import com.grack.nanojson.JsonBuilder;
@@ -54,7 +55,6 @@ import org.schabi.newpipe.extractor.utils.Utils;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -559,7 +559,7 @@ public final class YoutubeParsingHelper {
                     .end()
                 .end()
                 .value("fetchLiveState", true)
-            .end().done().getBytes(StandardCharsets.UTF_8);
+            .end().done().getBytes(UTF_8);
         // @formatter:on
 
         final var headers = getClientHeaders(WEB_CLIENT_ID, HARDCODED_CLIENT_VERSION);
@@ -752,7 +752,7 @@ public final class YoutubeParsingHelper {
                     .end()
                 .end()
                 .value("input", "")
-            .end().done().getBytes(StandardCharsets.UTF_8);
+            .end().done().getBytes(UTF_8);
         // @formatter:on
 
         final var headers = new HashMap<>(getOriginReferrerHeaders(YOUTUBE_MUSIC_URL));
@@ -1319,7 +1319,7 @@ public final class YoutubeParsingHelper {
                                 .value(CONTENT_CHECK_OK, true)
                                 .value(RACY_CHECK_OK, true)
                                 .done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
         final String url = YOUTUBEI_V1_URL + "player" + "?" + DISABLE_PRETTY_PRINT_PARAMETER
                 + "&$fields=microformat,playabilityStatus,storyboards,videoDetails";
 
@@ -1334,7 +1334,7 @@ public final class YoutubeParsingHelper {
             @Nonnull final ContentCountry contentCountry,
             @Nonnull final String videoId,
             @Nonnull final Integer sts,
-            @Nonnull final String contentPlaybackNonce) {
+            @Nonnull final String contentPlaybackNonce) throws IOException {
         // @formatter:off
         return JsonWriter.string(
                 prepareTvHtml5EmbedJsonBuilder(localization, contentCountry, videoId)
@@ -1351,7 +1351,7 @@ public final class YoutubeParsingHelper {
                     .value(CONTENT_CHECK_OK, true)
                     .value(RACY_CHECK_OK, true)
                     .done())
-                    .getBytes(StandardCharsets.UTF_8);
+                    .getBytes(UTF_8);
         // @formatter:on
     }
 
