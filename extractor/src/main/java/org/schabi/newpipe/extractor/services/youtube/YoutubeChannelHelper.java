@@ -7,6 +7,7 @@ import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.hasArtistOrVerifiedIconBadgeAttachment;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareDesktopJsonBuilder;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 import com.grack.nanojson.JsonObject;
 import com.grack.nanojson.JsonWriter;
@@ -86,7 +87,7 @@ public final class YoutubeChannelHelper {
                         prepareDesktopJsonBuilder(Localization.DEFAULT, ContentCountry.DEFAULT)
                             .value("url", urlToResolve)
                             .done())
-                    .getBytes(StandardCharsets.UTF_8);
+                    .getBytes(UTF_8);
 
                 final JsonObject jsonResponse = getJsonPostResponse(
                     "navigation/resolve_url", body, Localization.DEFAULT);
@@ -188,7 +189,7 @@ public final class YoutubeChannelHelper {
                             .value(BROWSE_ID, id)
                             .value("params", parameters)
                             .done())
-                    .getBytes(StandardCharsets.UTF_8);
+                    .getBytes(UTF_8);
 
             final JsonObject jsonResponse = getJsonPostResponse(
                     "browse", body, localization);

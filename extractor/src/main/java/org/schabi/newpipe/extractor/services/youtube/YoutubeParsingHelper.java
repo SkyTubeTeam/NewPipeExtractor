@@ -35,6 +35,7 @@ import static org.schabi.newpipe.extractor.utils.Utils.HTTP;
 import static org.schabi.newpipe.extractor.utils.Utils.HTTPS;
 import static org.schabi.newpipe.extractor.utils.Utils.getStringResultFromRegexArray;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 import com.google.protobuf.InvalidProtocolBufferException;
 import com.grack.nanojson.JsonArray;
@@ -59,6 +60,7 @@ import org.schabi.newpipe.extractor.playlist.PlaylistInfo;
 import org.schabi.newpipe.extractor.services.youtube.protos.video.Xtags.XTags;
 import org.schabi.newpipe.extractor.services.youtube.protos.video.Xtags.KeyValuePair;
 import org.schabi.newpipe.extractor.stream.AudioTrackType;
+import org.schabi.newpipe.extractor.utils.Base64;
 import org.schabi.newpipe.extractor.utils.JsonUtils;
 import org.schabi.newpipe.extractor.utils.Parser;
 import org.schabi.newpipe.extractor.utils.RandomStringFromAlphabetGenerator;
@@ -67,8 +69,6 @@ import org.schabi.newpipe.extractor.utils.Utils;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -456,7 +456,7 @@ public final class YoutubeParsingHelper {
                     .end()
                 .end()
                 .value("fetchLiveState", true)
-            .end().done().getBytes(StandardCharsets.UTF_8);
+            .end().done().getBytes(UTF_8);
         // @formatter:on
 
         final var headers = getClientHeaders(WEB_CLIENT_ID, WEB_HARDCODED_CLIENT_VERSION);
@@ -645,7 +645,7 @@ public final class YoutubeParsingHelper {
                     .end()
                 .end()
                 .value("input", "")
-            .end().done().getBytes(StandardCharsets.UTF_8);
+            .end().done().getBytes(UTF_8);
         // @formatter:on
 
         final var headers = new HashMap<>(getOriginReferrerHeaders(YOUTUBE_MUSIC_URL));
@@ -1421,7 +1421,7 @@ public final class YoutubeParsingHelper {
                 localization, contentCountry, innertubeClientRequestInfo, embedUrl);
 
         final byte[] body = JsonWriter.string(builder.done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
 
         final String visitorData = JsonUtils.toJsonObject(getValidJsonResponseBody(getDownloader()
                 .postWithContentTypeJson(
