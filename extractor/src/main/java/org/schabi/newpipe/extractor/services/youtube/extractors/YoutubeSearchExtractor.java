@@ -11,6 +11,7 @@ import static org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeS
 import static org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeSearchQueryHandlerFactory.VIDEOS;
 import static org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeSearchQueryHandlerFactory.getSearchParameter;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 import com.grack.nanojson.JsonArray;
 import com.grack.nanojson.JsonBuilder;
@@ -33,7 +34,6 @@ import org.schabi.newpipe.extractor.services.youtube.YoutubeMetaInfoHelper;
 import org.schabi.newpipe.extractor.utils.JsonUtils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Objects;
 
@@ -100,7 +100,7 @@ public class YoutubeSearchExtractor extends SearchExtractor {
             jsonBody.value("params", params);
         }
 
-        final byte[] body = JsonWriter.string(jsonBody.done()).getBytes(StandardCharsets.UTF_8);
+        final byte[] body = JsonWriter.string(jsonBody.done()).getBytes(UTF_8);
 
         initialData = getJsonPostResponse("search", body, localization);
     }
@@ -202,7 +202,7 @@ public class YoutubeSearchExtractor extends SearchExtractor {
                 getExtractorContentCountry())
                 .value("continuation", page.getId())
                 .done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
         // @formatter:on
 
         final JsonObject ajaxJson = getJsonPostResponse("search", json, localization);
