@@ -20,7 +20,6 @@ import org.schabi.newpipe.extractor.services.youtube.linkHandler.YoutubeChannelT
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,6 +30,7 @@ import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getJsonPostResponse;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareDesktopJsonBuilder;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 /**
  * A {@link ChannelTabExtractor} implementation for the YouTube service.
@@ -484,7 +484,7 @@ public class YoutubeChannelTabExtractor extends ChannelTabExtractor {
                         getExtractorContentCountry())
                         .value("continuation", continuation)
                         .done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
 
         return new Page(YOUTUBEI_V1_URL + "browse?" + DISABLE_PRETTY_PRINT_PARAMETER, null,
                 channelIds, null, body);
