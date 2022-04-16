@@ -12,6 +12,7 @@ import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getValidJsonResponseBody;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareDesktopJsonBuilder;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 import com.grack.nanojson.JsonArray;
 import com.grack.nanojson.JsonObject;
@@ -35,7 +36,6 @@ import org.schabi.newpipe.extractor.utils.JsonUtils;
 import org.schabi.newpipe.extractor.utils.Utils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -69,7 +69,7 @@ public class YoutubePlaylistExtractor extends PlaylistExtractor {
                         .value("browseId", "VL" + getId())
                         .value("params", "wgYCCAA%3D") // Show unavailable videos
                         .done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
 
         browseResponse = getJsonPostResponse("browse", body, localization);
         YoutubeParsingHelper.defaultAlertsCheck(browseResponse);
@@ -315,7 +315,7 @@ public class YoutubePlaylistExtractor extends PlaylistExtractor {
                             getExtractorLocalization(), getExtractorContentCountry())
                             .value("continuation", continuation)
                             .done())
-                    .getBytes(StandardCharsets.UTF_8);
+                    .getBytes(UTF_8);
 
             return new Page(YOUTUBEI_V1_URL + "browse?key=" + getKey()
                     + DISABLE_PRETTY_PRINT_PARAMETER, body);

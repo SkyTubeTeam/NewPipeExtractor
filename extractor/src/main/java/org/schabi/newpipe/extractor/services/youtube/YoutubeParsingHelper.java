@@ -56,7 +56,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -1287,7 +1286,7 @@ public final class YoutubeParsingHelper {
                 .value(CONTENT_CHECK_OK, true)
                 .value(RACY_CHECK_OK, true)
                 .done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
         // @formatter:on
     }
 

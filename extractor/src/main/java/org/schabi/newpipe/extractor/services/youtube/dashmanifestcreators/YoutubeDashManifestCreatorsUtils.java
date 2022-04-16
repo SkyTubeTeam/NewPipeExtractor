@@ -27,7 +27,6 @@ import javax.xml.transform.stream.StreamResult;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -43,6 +42,7 @@ import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.isTvHtml5SimplyEmbeddedPlayerStreamingUrl;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.isWebStreamingUrl;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 /**
  * Utilities and constants for YouTube DASH manifest creators.
@@ -587,7 +587,7 @@ public final class YoutubeDashManifestCreatorsUtils {
                 final Map<String, List<String>> headers = Collections.singletonMap("User-Agent",
                         Collections.singletonList(isAndroidStreamingUrl
                                 ? getAndroidUserAgent(null) : getIosUserAgent(null)));
-                final byte[] emptyBody = "".getBytes(StandardCharsets.UTF_8);
+                final byte[] emptyBody = "".getBytes(UTF_8);
                 return downloader.post(baseStreamingUrl, headers, emptyBody);
             } catch (final IOException | ExtractionException e) {
                 throw new CreationException("Could not get the "
