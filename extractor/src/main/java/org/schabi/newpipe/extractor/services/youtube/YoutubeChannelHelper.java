@@ -9,13 +9,13 @@ import org.schabi.newpipe.extractor.localization.Localization;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.defaultAlertsCheck;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getJsonPostResponse;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareDesktopJsonBuilder;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 /**
  * Shared functions for extracting YouTube channel pages and tabs.
@@ -51,7 +51,7 @@ public final class YoutubeChannelHelper {
                     prepareDesktopJsonBuilder(Localization.DEFAULT, ContentCountry.DEFAULT)
                             .value("url", "https://www.youtube.com/" + idOrPath)
                             .done())
-                    .getBytes(StandardCharsets.UTF_8);
+                    .getBytes(UTF_8);
 
             final JsonObject jsonResponse = getJsonPostResponse(
                     "navigation/resolve_url", body, Localization.DEFAULT);
@@ -143,7 +143,7 @@ public final class YoutubeChannelHelper {
                             .value("browseId", id)
                             .value("params", parameters)
                             .done())
-                    .getBytes(StandardCharsets.UTF_8);
+                    .getBytes(UTF_8);
 
             final JsonObject jsonResponse = getJsonPostResponse(
                     "browse", body, localization);
