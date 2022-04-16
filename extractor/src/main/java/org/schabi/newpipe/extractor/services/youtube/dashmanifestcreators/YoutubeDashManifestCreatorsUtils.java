@@ -5,6 +5,7 @@ import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.isVisionOsStreamingUrl;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.isWebStreamingUrl;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 import org.schabi.newpipe.extractor.MediaFormat;
 import org.schabi.newpipe.extractor.NewPipe;
@@ -22,7 +23,6 @@ import org.w3c.dom.Element;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -615,7 +615,7 @@ public final class YoutubeDashManifestCreatorsUtils {
             try {
                 return downloader.post(baseStreamingUrl,
                         Map.of("User-Agent", List.of(getVisionOsUserAgent(null))),
-                        "".getBytes(StandardCharsets.UTF_8));
+                        "".getBytes(UTF_8));
             } catch (final IOException | ExtractionException e) {
                 throw new CreationException("Could not get the VISIONOS streaming URL response", e);
             }
