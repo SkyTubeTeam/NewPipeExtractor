@@ -1,9 +1,9 @@
 name: CI
 
 on:
-  schedule:
-      # once per day
-    - cron: 0 0 * * *
+  # schedule:
+  #    # once per day
+  #  - cron: 0 0 * * *
   push:
     branches:
       - dev
