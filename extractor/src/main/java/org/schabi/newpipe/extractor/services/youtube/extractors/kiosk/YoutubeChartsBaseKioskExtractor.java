@@ -26,7 +26,6 @@ import org.schabi.newpipe.extractor.utils.JsonUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.ZoneOffset;
 import java.util.HashMap;
@@ -40,6 +39,7 @@ import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getValidJsonResponseBody;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareJsonBuilder;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 /**
  * Base class parsing responses from YouTube Charts for all trending video charts.
@@ -97,7 +97,7 @@ abstract class YoutubeChartsBaseKioskExtractor extends KioskExtractor<StreamInfo
                         + contentCountry.getCountryCode() + "&chart_params_chart_type="
                         + chartType)
                 .done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
 
         final var headers = new HashMap<>(getOriginReferrerHeaders("https://charts.youtube.com"));
         headers.putAll(getClientHeaders(innertubeClientRequestInfo.clientInfo.clientId,
