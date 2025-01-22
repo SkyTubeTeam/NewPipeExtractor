@@ -11,7 +11,6 @@ import org.schabi.newpipe.extractor.utils.JsonUtils;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -29,6 +28,7 @@ import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getVisionOsUserAgent;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.getYouTubeHeaders;
 import static org.schabi.newpipe.extractor.services.youtube.YoutubeParsingHelper.prepareJsonBuilder;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 public final class YoutubeStreamHelper {
 
@@ -60,7 +60,7 @@ public final class YoutubeStreamHelper {
         addVideoIdCpnAndOkChecks(builder, videoId, null);
 
         final byte[] body = JsonWriter.string(builder.done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
 
         final String url = YOUTUBEI_V1_URL + PLAYER + "?" + DISABLE_PRETTY_PRINT_PARAMETER
                 + "&$fields=microformat,videoDetails.thumbnail.thumbnails,videoDetails.videoId";
@@ -94,7 +94,7 @@ public final class YoutubeStreamHelper {
         addVideoIdCpnAndOkChecks(builder, videoId, cpn);
 
         final byte[] body = JsonWriter.string(builder.done())
-                .getBytes(StandardCharsets.UTF_8);
+                .getBytes(UTF_8);
 
         final String url = YOUTUBEI_V1_GAPIS_URL + PLAYER + "?" + DISABLE_PRETTY_PRINT_PARAMETER
                 + "&t=" + generateTParameter() + "&id=" + videoId;

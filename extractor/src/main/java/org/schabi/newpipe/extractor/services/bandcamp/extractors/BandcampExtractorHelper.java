@@ -19,7 +19,6 @@ import org.schabi.newpipe.extractor.utils.ImageSuffix;
 import org.schabi.newpipe.extractor.utils.Utils;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.time.DateTimeException;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +30,7 @@ import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 import static org.schabi.newpipe.extractor.Image.HEIGHT_UNKNOWN;
 import static org.schabi.newpipe.extractor.Image.WIDTH_UNKNOWN;
 import static org.schabi.newpipe.extractor.utils.Utils.isNullOrEmpty;
@@ -125,7 +125,7 @@ public final class BandcampExtractorHelper {
                             .value("band_id", id)
                             .end()
                             .done()
-                            .getBytes(StandardCharsets.UTF_8)).responseBody());
+                            .getBytes(UTF_8)).responseBody());
         } catch (final IOException | ReCaptchaException | JsonParserException e) {
             throw new ParsingException("Could not download band details", e);
         }
