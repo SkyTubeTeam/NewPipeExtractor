@@ -3,6 +3,7 @@
 package org.schabi.newpipe.extractor.services.bandcamp.extractors;
 
 import static org.schabi.newpipe.extractor.services.bandcamp.extractors.BandcampExtractorHelper.BASE_API_URL;
+import static org.schabi.newpipe.extractor.utils.Utils.UTF_8;
 
 import com.grack.nanojson.JsonObject;
 import com.grack.nanojson.JsonParser;
@@ -16,7 +17,6 @@ import org.schabi.newpipe.extractor.exceptions.ExtractionException;
 import org.schabi.newpipe.extractor.suggestion.SuggestionExtractor;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -46,7 +46,7 @@ public class BandcampSuggestionExtractor extends SuggestionExtractor {
                                     .value("search_text", query)
                                     .end()
                                     .done()
-                                    .getBytes(StandardCharsets.UTF_8)).responseBody());
+                                    .getBytes(UTF_8)).responseBody());
 
             return fuzzyResults.getObject("auto").getArray("results").stream()
                     .filter(JsonObject.class::isInstance)
