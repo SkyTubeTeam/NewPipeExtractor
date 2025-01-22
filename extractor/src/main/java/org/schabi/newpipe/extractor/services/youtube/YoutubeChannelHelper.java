@@ -19,7 +19,6 @@ import org.schabi.newpipe.extractor.localization.Localization;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
 import javax.annotation.Nonnull;
