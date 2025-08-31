@@ -90,7 +90,6 @@ dependencies {
     implementation(libs.google.protobuf)
 
     implementation(libs.mozilla.rhino.core)
-    implementation(libs.mozilla.rhino.engine)
 
     checkstyle(libs.puppycrawl.checkstyle)
 
