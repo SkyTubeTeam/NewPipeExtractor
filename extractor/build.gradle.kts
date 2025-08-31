@@ -74,7 +74,8 @@ checkstyle {
 tasks.checkstyleMain {
     exclude(
         "org/schabi/newpipe/extractor/services/youtube/protos",
-        "org/schabi/newpipe/extractor/timeago"
+        "org/schabi/newpipe/extractor/timeago",
+        "org/schabi/newpipe/extractor/utils/Base64.java"
     )
 }
 

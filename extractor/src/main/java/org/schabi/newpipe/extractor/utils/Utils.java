@@ -23,6 +23,7 @@ public final class Utils {
     private static final Pattern M_PATTERN = Pattern.compile("(https?)?://m\\.");
     private static final Pattern WWW_PATTERN = Pattern.compile("(https?)?://www\\.");
     public static final String UTF_8 = "UTF-8";
+    public static final String ISO_8859_1 = "ISO-8859-1";
 
     private Utils() {
         // no instance
