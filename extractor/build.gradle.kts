@@ -57,14 +57,14 @@ tasks.test {
 }
 
 // https://checkstyle.org/#JRE_and_JDK
+// Note: Using Java 11 for compatibility with old Android versions
 tasks.withType<Checkstyle>().configureEach {
-    javaLauncher = javaToolchains.launcherFor {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+    // For Gradle 7.x compatibility, we use the default Java launcher
+    // which should be Java 11 as configured in the root build.gradle.kts
 }
 
 checkstyle {
-    configDirectory = rootProject.file("checkstyle")
+    configDirectory.set(rootProject.layout.projectDirectory.dir("checkstyle"))
     isIgnoreFailures = false
     isShowViolations = true
     toolVersion = libs.versions.checkstyle.get()
@@ -124,28 +124,29 @@ publishing {
         val mavenGroupId = "net.newpipe"
         val mavenArtifactId = "extractor"
         fun MavenPublication.setupPOM() = pom {
-            name = "NewPipe Extractor"
-            description = "A library for extracting data from streaming websites, used in NewPipe"
-            url = "https://github.com/TeamNewPipe/NewPipeExtractor"
+
+            name.set("NewPipe Extractor")
+            description.set("A library for extracting data from streaming websites, used in NewPipe")
+            url.set("https://github.com/TeamNewPipe/NewPipeExtractor")
 
             licenses {
                 license {
-                    name = "GNU GENERAL PUBLIC LICENSE, Version 3"
-                    url = "https://www.gnu.org/licenses/gpl-3.0.txt"
+                    name.set("GNU GENERAL PUBLIC LICENSE, Version 3")
+                    url.set("https://www.gnu.org/licenses/gpl-3.0.txt")
                 }
             }
 
             scm {
-                url = "https://github.com/TeamNewPipe/NewPipeExtractor"
-                connection = "scm:git:git@github.com:TeamNewPipe/NewPipeExtractor.git"
-                developerConnection = "scm:git:git@github.com:TeamNewPipe/NewPipeExtractor.git"
+                url.set("https://github.com/TeamNewPipe/NewPipeExtractor")
+                connection.set("scm:git:git@github.com:TeamNewPipe/NewPipeExtractor.git")
+                developerConnection.set("scm:git:git@github.com:TeamNewPipe/NewPipeExtractor.git")
             }
 
             developers {
                 developer {
-                    id = "newpipe"
-                    name = "Team NewPipe"
-                    email = "team@newpipe.net"
+                    id.set("newpipe")
+                    name.set("Team NewPipe")
+                    email.set("team@newpipe.net")
                 }
             }
         }

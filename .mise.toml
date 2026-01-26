@@ -1,0 +1,4 @@
+[tools]
+gradle = "7.6.6"
+java = "temurin-11"
+
