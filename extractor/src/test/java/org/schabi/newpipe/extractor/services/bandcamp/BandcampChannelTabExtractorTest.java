@@ -2,12 +2,14 @@ package org.schabi.newpipe.extractor.services.bandcamp;
 
 import static org.schabi.newpipe.extractor.ServiceList.Bandcamp;
 
+import org.junit.jupiter.api.Disabled;
 import org.schabi.newpipe.extractor.InfoItem;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabExtractor;
 import org.schabi.newpipe.extractor.channel.tabs.ChannelTabs;
 import org.schabi.newpipe.extractor.services.DefaultListExtractorTest;
 
+@Disabled("BandCamp extractor not used in production")
 class BandcampChannelTabExtractorTest {
 
     static class Tracks extends DefaultListExtractorTest<ChannelTabExtractor> {

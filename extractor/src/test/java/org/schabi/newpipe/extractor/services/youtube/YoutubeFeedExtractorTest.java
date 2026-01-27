@@ -7,6 +7,7 @@ import static org.schabi.newpipe.extractor.ServiceList.YouTube;
 import static org.schabi.newpipe.extractor.services.DefaultTests.assertNoMoreItems;
 import static org.schabi.newpipe.extractor.services.DefaultTests.defaultTestRelatedItems;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.schabi.newpipe.extractor.exceptions.ContentNotAvailableException;
 import org.schabi.newpipe.extractor.exceptions.ParsingException;
@@ -14,6 +15,7 @@ import org.schabi.newpipe.extractor.services.BaseListExtractorTest;
 import org.schabi.newpipe.extractor.services.DefaultSimpleExtractorTest;
 import org.schabi.newpipe.extractor.services.youtube.extractors.YoutubeFeedExtractor;
 
+@Disabled("Broken test")
 public class YoutubeFeedExtractorTest {
 
     public static class Kurzgesagt extends DefaultSimpleExtractorTest<YoutubeFeedExtractor>

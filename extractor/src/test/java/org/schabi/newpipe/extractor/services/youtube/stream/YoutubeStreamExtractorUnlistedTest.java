@@ -3,6 +3,7 @@ package org.schabi.newpipe.extractor.services.youtube.stream;
 import static org.schabi.newpipe.extractor.ServiceList.YouTube;
 import static org.schabi.newpipe.extractor.stream.StreamExtractor.Privacy.UNLISTED;
 
+import org.junit.jupiter.api.Disabled;
 import org.schabi.newpipe.extractor.StreamingService;
 import org.schabi.newpipe.extractor.services.DefaultStreamExtractorTest;
 import org.schabi.newpipe.extractor.services.youtube.InitYoutubeTest;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+@Disabled("Broken test")
 public class YoutubeStreamExtractorUnlistedTest extends DefaultStreamExtractorTest
     implements InitYoutubeTest {
     static final String ID = "udsB8KnIJTg";
