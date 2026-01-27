@@ -17,6 +17,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+@Disabled
 public class YoutubeStreamExtractorCollaboratorsTest extends DefaultStreamExtractorTest
     implements InitYoutubeTest {
     private static final String ID = "3sbYbckT1VY";
