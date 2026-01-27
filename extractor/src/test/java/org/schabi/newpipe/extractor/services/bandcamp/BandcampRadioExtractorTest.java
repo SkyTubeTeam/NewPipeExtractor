@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.schabi.newpipe.extractor.ServiceList.Bandcamp;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.schabi.newpipe.extractor.services.BaseListExtractorTest;
 import org.schabi.newpipe.extractor.services.DefaultSimpleExtractorTest;
@@ -18,6 +19,7 @@ import java.util.List;
 /**
  * Tests for {@link BandcampRadioExtractor}
  */
+@Disabled("BandCamp extractor not used in production")
 public class BandcampRadioExtractorTest extends DefaultSimpleExtractorTest<BandcampRadioExtractor>
     implements BaseListExtractorTest {
 
